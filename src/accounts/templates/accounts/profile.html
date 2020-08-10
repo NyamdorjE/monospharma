@@ -18,7 +18,7 @@
 							<img src="images/icons/avatar.jpg" class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
 
 							<div class="heading-block noborder">
-								<h3>SemiColonWeb</h3>
+								<h3>{{ user.username }}</h3>
 								<span>Your Profile Bio</span>
 							</div>
 
@@ -41,7 +41,11 @@
 
 											<div class="tab-content clearfix" id="tab-feeds">
 
-												<p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium harum ea quo! Nulla fugiat earum, sed corporis amet iste non, id facilis dolorum, suscipit, deleniti ea. Nobis, temporibus magnam doloribus. Reprehenderit necessitatibus esse dolor tempora ea unde, itaque odit. Quos.</p>
+												<p class="">{{ user.firstname }}</p>
+												<p class="">{{ user.lastname }}</p>
+												<p class="">{{ user.email }}</p>
+												<p class="">{{ user.register }}</p>
+												<p class="">{{ user.phone }}</p>
 
 												<div class="table-responsive">
 													<table class="table table-bordered table-striped">
@@ -212,7 +216,7 @@
 																		</div>
 																	</div>
 																	<div class="comment-content clearfix">
-																		<div class="comment-author"><a href='#' rel='external nofollow' class='url'>SemiColon</a><span><a href="#" title="Permalink to this comment">April 25, 2012 at 1:03 am</a></span></div>
+																		<div class="comment-author"><a href='#' rel='external nofollow' class='url'>{{ user.username }}</a><span><a href="#" title="Permalink to this comment">April 25, 2012 at 1:03 am</a></span></div>
 
 																		<p>Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 

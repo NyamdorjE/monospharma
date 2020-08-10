@@ -19,21 +19,23 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.conf.urls import include, url
-from src.base.models import poll, humanresource
+from src.base.models import poll, humanresource, contact, request
 from src.accounts import views as user_views
 from src.courses import views as courses_views
 from src.news import views as news_views
 
+app_name = 'polls'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('poll/', poll.home, name='poll'),
-    path('vote/<poll_id>/', poll.vote, name='vote'),
-    path('results/<poll_id>/', poll.results, name='results'),
-    path('humanr/', humanresource.application, name='application'),
+    path('humanresource/', humanresource.HrList, name='humanresource'),
+    path('request/', request.request, name='request'),
+    path('contact/', contact.contact, name='contact'),
     path('', include('src.accounts.urls')),
     path('', include('src.courses.urls')),
     path('', include('src.news.urls')),
     path('', include('src.product.urls')),
+    path('', include('src.poll.urls')),
+
 
 ]

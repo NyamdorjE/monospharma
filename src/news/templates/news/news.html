@@ -56,46 +56,25 @@
 
 							<div class="widget clearfix">
 
-								<h4>Сэтгэгдэл</h4>
+								<h4>Зөвлөгөө</h4>
 								<div class="fslider testimonial noborder nopadding noshadow" data-animation="slide" data-arrows="false">
 									<div class="flexslider">
 										<div class="slider-wrap">
+										{% for advice in advice %}
 											<div class="slide">
 												<div class="testi-image">
-													<a href="#"><img src="{% static 'base/assets/images/testimonials/3.jpg' %}" alt="Customer Testimonails"></a>
+													<a href="#"><img src="{% static 'base/assets/images/advice/advice.png' %}" alt="Customer Testimonails"></a>
 												</div>
 												<div class="testi-content">
-													<p>Similique fugit repellendus expedita excepturi iure perferendis provident quia eaque. Repellendus, vero numquam?</p>
+													<p>{{ advice.content|safe|slice:":100" }}</p>
 													<div class="testi-meta">
-														Steve Jobs
-														<span>Apple Inc.</span>
+														{{ advice.title }}
+														<span>{{ advice.category }}</span>
 													</div>
 												</div>
 											</div>
-											<div class="slide">
-												<div class="testi-image">
-													<a href="#"><img src="images/testimonials/2.jpg" alt="Customer Testimonails"></a>
-												</div>
-												<div class="testi-content">
-													<p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
-													<div class="testi-meta">
-														Collis Ta'eed
-														<span>Envato Inc.</span>
-													</div>
-												</div>
-											</div>
-											<div class="slide">
-												<div class="testi-image">
-													<a href="#"><img src="images/testimonials/1.jpg" alt="Customer Testimonails"></a>
-												</div>
-												<div class="testi-content">
-													<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-													<div class="testi-meta">
-														John Doe
-														<span>XYZ Inc.</span>
-													</div>
-												</div>
-											</div>
+											{% endfor %}
+											
 										</div>
 									</div>
 								</div>
@@ -165,10 +144,10 @@
 						</div><!-- #posts end -->
 						   
                     </div>
-                  <div class="paginationr">
+                  <div class="pagination" style="padding-left: 150px;">
             
                             {% if is_paginated %}
-                        <ul class="paginationr">
+                        <ul class="pagination">
                             {% if page_obj.has_previous %}
                             <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
                             {% else %}

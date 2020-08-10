@@ -40,7 +40,7 @@ class CourseDetailView(DetailView):
 
 
 class SuggestView(TemplateView):
-    template_name = "courses/suggest.html"
+    template_name = "request.html"
 
 
 class LessonDetailView(View, LoginRequiredMixin):

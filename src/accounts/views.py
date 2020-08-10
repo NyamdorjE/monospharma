@@ -16,8 +16,9 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import View, FormView
+from django.views.generic import View, FormView, TemplateView
 from django.conf import settings
+from django.views import generic
 
 from .utils import (
     send_activation_email, send_reset_password_email, send_forgotten_username_email, send_activation_change_email,
@@ -75,8 +76,10 @@ class LogInView(GuestOnlyView, FormView):
 
         login(request, form.user_cache)
 
-        redirect_to = request.POST.get(REDIRECT_FIELD_NAME, request.GET.get(REDIRECT_FIELD_NAME))
-        url_is_safe = is_safe_url(redirect_to, allowed_hosts=request.get_host(), require_https=request.is_secure())
+        redirect_to = request.POST.get(
+            REDIRECT_FIELD_NAME, request.GET.get(REDIRECT_FIELD_NAME))
+        url_is_safe = is_safe_url(
+            redirect_to, allowed_hosts=request.get_host(), require_https=request.is_secure())
 
         if url_is_safe:
             return redirect(redirect_to)
@@ -145,7 +148,8 @@ class ActivateView(View):
         # Remove the activation record
         act.delete()
 
-        messages.success(request, _('You have successfully activated your account!'))
+        messages.success(request, _(
+            'You have successfully activated your account!'))
 
         return redirect('accounts:log_in')
 
@@ -175,7 +179,8 @@ class ResendActivationCodeView(GuestOnlyView, FormView):
 
         send_activation_email(self.request, user.email, code)
 
-        messages.success(self.request, _('A new activation code has been sent to your email address.'))
+        messages.success(self.request, _(
+            'A new activation code has been sent to your email address.'))
 
         return redirect('accounts:resend_activation_code')
 
@@ -220,7 +225,8 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
         user.last_name = form.cleaned_data['last_name']
         user.save()
 
-        messages.success(self.request, _('Profile data has been successfully updated.'))
+        messages.success(self.request, _(
+            'Profile data has been successfully updated.'))
 
         return redirect('accounts:change_profile')
 
@@ -254,7 +260,8 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
 
             send_activation_change_email(self.request, email, code)
 
-            messages.success(self.request, _('To complete the change of email address, click on the link sent to it.'))
+            messages.success(self.request, _(
+                'To complete the change of email address, click on the link sent to it.'))
         else:
             user.email = email
             user.save()
@@ -277,7 +284,8 @@ class ChangeEmailActivateView(View):
         # Remove the activation record
         act.delete()
 
-        messages.success(request, _('You have successfully changed your email!'))
+        messages.success(request, _(
+            'You have successfully changed your email!'))
 
         return redirect('accounts:change_email')
 
@@ -290,7 +298,8 @@ class RemindUsernameView(GuestOnlyView, FormView):
         user = form.user_cache
         send_forgotten_username_email(user.email, user.username)
 
-        messages.success(self.request, _('Your username has been successfully sent to your email.'))
+        messages.success(self.request, _(
+            'Your username has been successfully sent to your email.'))
 
         return redirect('accounts:remind_username')
 
@@ -317,7 +326,8 @@ class RestorePasswordConfirmView(BasePasswordResetConfirmView):
         # Change the password
         form.save()
 
-        messages.success(self.request, _('Your password has been set. You may go ahead and log in now.'))
+        messages.success(self.request, _(
+            'Your password has been set. You may go ahead and log in now.'))
 
         return redirect('accounts:log_in')
 
@@ -328,3 +338,7 @@ class RestorePasswordDoneView(BasePasswordResetDoneView):
 
 class LogOutView(LoginRequiredMixin, BaseLogoutView):
     template_name = 'accounts/log_out.html'
+
+
+class ProfileView(TemplateView):
+    template_name = 'accounts/profile.html'

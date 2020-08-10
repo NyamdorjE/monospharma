@@ -2,6 +2,7 @@ from django.shortcuts import render
 from src.news.models import Category, News
 from src.courses.models import Course
 from src.product.models import Product, ProductCategory
+from .models import Advice, AdviceCategory, Testimonail, Gallery
 from django.http import HttpResponse
 from django.views import generic
 from django.views.generic import TemplateView
@@ -24,9 +25,9 @@ class Homepage(generic.ListView):
         context['special'] = News.objects.filter(is_special='True')
         context['category'] = Course.objects.all()
         context['news'] = News.objects.all().order_by('-created_on')
-        context['productone'] = Product.objects.filter(categories_id=1)
-        context['producttwo'] = Product.objects.filter(categories_id=2)
-        context['productthree'] = Product.objects.filter(categories_id=3)
+        context['newproduct'] = Product.objects.filter(is_product_new=True)
+        context['advice'] = Advice.objects.all()
+        context['testimonail'] = Testimonail.objects.all()
         return context
 
     # def get_context_data(self, **kwargs):
@@ -72,3 +73,27 @@ class AboutPage(TemplateView):
 
 class Greetings(TemplateView):
     template_name = "news/greetings.html"
+
+
+class AdviceNews(generic.ListView):
+    queryset = Advice.objects.all()
+    template_name = 'news/advice.html'
+    paginate_by = 4
+
+    def get_context_data(self, **kwargs):
+        context = super(AdviceNews, self).get_context_data(**kwargs)
+        context['advice'] = self.get_queryset()
+        context['category_list'] = Category.objects.filter(cate_type="news")
+        context['search_text'] = self.request.GET.get('search_text', '')
+
+        return context
+
+    def get_queryset(self):
+        queryset = super(AdviceNews, self).get_queryset()
+        search_text = self.request.GET.get('search_text', None)
+        if search_text:
+            queryset = queryset.filter(
+                Q(title__icontains=search_text) |
+                Q(content__icontains=search_text)
+            )
+        return queryset

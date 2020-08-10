@@ -6,19 +6,23 @@
 
 #page-menu.dots-menu nav li div:after,
 .title-block {
-	border-right-color: #1ABC9C;
-	border-left-color: transparent;
+  border-right-color: #3e8a4f;
+  border-left-color: transparent;
 }
 
 .title-block-right {
-	border-left-color: #1ABC9C;
-	border-right-color: transparent;
+  border-left-color: #3e8a4f;
+  border-right-color: transparent;
 }
 
 .fbox-effect.fbox-dark .fbox-icon i:after,
-.dark .fbox-effect.fbox-dark .fbox-icon i:after { box-shadow: 0 2px 0 0 #1ABC9C; }
+.dark .fbox-effect.fbox-dark .fbox-icon i:after {
+  box-shadow: 0 2px 0 0 #3e8a4f;
+}
 
 .fbox-border.fbox-effect.fbox-dark .fbox-icon i:hover,
 .fbox-border.fbox-effect.fbox-dark:hover .fbox-icon i,
 .dark .fbox-border.fbox-effect.fbox-dark .fbox-icon i:hover,
-.dark .fbox-border.fbox-effect.fbox-dark:hover .fbox-icon i { box-shadow: 0 1px 0 0 #1ABC9C; }
+.dark .fbox-border.fbox-effect.fbox-dark:hover .fbox-icon i {
+  box-shadow: 0 1px 0 0 #3e8a4f;
+}

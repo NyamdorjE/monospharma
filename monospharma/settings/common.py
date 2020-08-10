@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'src.product.apps.ProductConfig',
     'src.news.apps.NewsConfig',
     'src.website.apps.WebsiteConfig',
+    'src.poll.apps.PollConfig',
     'widget_tweaks',
     'ckeditor',
     'registration',

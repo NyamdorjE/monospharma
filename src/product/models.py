@@ -48,11 +48,14 @@ class Product(models.Model):
         'Picture'), upload_to='media/product/image/')
     price = models.CharField(
         max_length=150, verbose_name=_('Price'),  default="₮")
+    is_product_new = models.BooleanField(default=False)
+    link = models.CharField(verbose_name=_(
+        'Link to emonos'), max_length=355, null=True)
 
     class Meta:
         verbose_name = _('Product')
         verbose_name_plural = _('Prodcuts')
-        ordering = []
+        ordering = ['created_on']
 
     @property
     def get_products(self):

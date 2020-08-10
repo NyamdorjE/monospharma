@@ -47,7 +47,7 @@ def request(request):
             form.save()
     else:
         form = RequestForm()
-    return render(request, 'homecontact.html', {'form': form})
+    return render(request, 'request.html', {'form': form})
 
 
 admin.site.register(Request)

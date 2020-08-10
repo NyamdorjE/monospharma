@@ -1,6 +1,10 @@
 # Poll model ehlel
 
 
+from django.contrib import admin
+from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -23,14 +27,7 @@ class Poll(models.Model):
         ordering = ['question']
 
 
-
 # Poll view ehlel
-
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth.decorators import user_passes_test
-
-
 
 
 def home(request):
@@ -39,7 +36,6 @@ def home(request):
         'polls': polls
     }
     return render(request, 'poll/home.html', context)
-
 
 
 def vote(request, poll_id):
@@ -76,15 +72,8 @@ def results(request, poll_id):
     return render(request, 'poll/results.html', context)
 
 
-
-from django.contrib import admin
-
-
-
-
 class PollAdmin(admin.ModelAdmin):
-	list_display = ['question']
+    list_display = ['question']
+
+
 admin.site.register(Poll, PollAdmin)
-
-
-

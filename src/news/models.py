@@ -13,6 +13,7 @@ class Category(models.Model):
     category_type = (
         ("news", "News"),
         ("research", "Research")
+
     )
     cate_type = models.CharField(
         max_length=255, choices=category_type, default="news")

@@ -15,7 +15,7 @@ from django.utils.translation import gettext as _
 class ProductList(generic.ListView):
     queryset = Product.objects.all()
     template_name = 'product/product.html'
-    paginate_by = 20
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(ProductList, self).get_context_data(**kwargs)
